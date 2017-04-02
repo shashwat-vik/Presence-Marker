@@ -1,0 +1,22 @@
+<html>
+<head>
+    <link href="{{url_for('static', filename="css/bootstrap.css")}}" rel="stylesheet">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.2.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+</head>
+<body>
+    <div class="container">
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  Link with href
+</a>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  Button with data-target
+</button>
+<div class="collapse" id="collapseExample">
+  <div class="well">
+    ...
+  </div>
+</div>
+    </div>
+</body>
+</html>

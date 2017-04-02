@@ -1,0 +1,52 @@
+<html>
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href="{{url_for('static', filename="css/bootstrap.min.css")}}" rel="stylesheet">
+    <link href="{{url_for('static', filename="css/attendance_sheet.css")}}" rel="stylesheet">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.2.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/attendance_sheet.js')}}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading header_panel">
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-4 text-center">SEM 1</div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 text-center">CSE</div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 text-center">
+                            <span>B</span>
+                            <span class="clickable pull-right" style="padding-top:2%;">
+                                <button class="btn btn-primary btn-md">
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body collapse">
+                    <p>Paragraphs</p>
+                </div>
+    		</div>
+        </div>
+        <div class="row text-center" style="padding-bottom:2%;">
+            <button class="btn btn-warning btn-lg monitor-button">
+                <span class="glyphicon glyphicon-play"></span>
+            </button>
+        </div>
+        <div class="row child_panels">
+            {% for i in range(15) -%}
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <label class="expand">
+                    <div class="label label-danger expand toggle_uncheck">
+                        <h1 class="atomic_number" id={{loop.index}}>{{loop.index}}</h1>
+                    </div>
+                    <input type="checkbox" class="hidden atomic_checkbox" id={{loop.index}}>
+                </label>
+            </div>
+            {%- endfor %}
+        </div>
+    </div>
+</body>
+</html>
