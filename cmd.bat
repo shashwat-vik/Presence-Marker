@@ -1,2 +1,2 @@
 @ECHO OFF
-start cmd.exe /k ..\..\Python\Python35-64\Scripts\activate
+Python35-32/scripts/cmd.bat

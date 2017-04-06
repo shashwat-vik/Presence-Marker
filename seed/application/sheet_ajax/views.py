@@ -5,7 +5,7 @@ from scripts.create_csv import attendance_csv
 from scripts.create_csv import ip_role_csv
 from scripts.create_csv import dhcp_tp_link_csv
 
-import queue, json
+import queue, json, os
 
 sheet_ajax_blueprint = Blueprint("sheet_ajax", __name__, template_folder="templates")
 
@@ -54,17 +54,22 @@ def submitted_attendance():
     end_roll = int(request.form['hid_end_roll'])
     var_id = request.form.getlist("var_id[]")
 
+    root = os.getcwd().replace("\\","/")
+    root = root.split('/Apache24/bin')[0]
+    csv_path = root + '/tmp'
+    session_name = "/{0}_{1}_{2}_{3}".format(sem, branch, sect, period)
+
     present_rolls = set()
     for i in var_id:
         present_rolls.add(int(i[2:]))
-    filename = "F:/X/{0}_{1}_{2}_{3}.csv".format(sem, branch, sect, period)
+    filename = csv_path + "/{0}_{1}_{2}_{3}.csv".format(sem, branch, sect, period)
     attendance_csv(filename, sem, branch, sect, period, start_roll, end_roll, present_rolls)
 
     client_data_sorted_list = sorted(list(client_data.queue), key=lambda x:x[1])
-    ip_role_csv('F:/X/ip_role.csv', client_data_sorted_list)
+    ip_role_csv(csv_path + '/ip_role.csv', client_data_sorted_list)
 
     ip_mac = DHCP()
-    dhcp_tp_link_csv('F:/X/dhcp_csv_tp_link.csv', client_data_sorted_list, ip_mac)
+    dhcp_tp_link_csv(csv_path + '/dhcp_csv_tp_link.csv', client_data_sorted_list, ip_mac)
     return "<h1>AWESOME !</h1>"
 
 @sheet_ajax_blueprint.route("/{0}/display".format(base_url))
