@@ -1,0 +1,141 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.2.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/create_attendance_sheet.js')}}"></script>
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/create_attendance_sheet.css')}}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+    <form action = "{{url_for('basic_blue.attendance_sheet')}}" method = "POST">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="well well-sm">
+                    <div class="row bottom_clear">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <span class="glyphicon glyphicon-education header_element" style="color:#000000;"></span>
+                        </div>
+                    </div>
+                    <div class="row info1_header text-center">
+                        <div class="col-xs-4 col-sm-2 col-md-2 col-sm-offset-3 col-md-offset-3">
+                            <p class="header_element">SEM</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-2 col-md-2">
+                            <p class="header_element">STR</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-2 col-md-2">
+                            <p class="header_element">SEC</p>
+                        </div>
+                    </div>
+                    <div class="row info1_body">
+                        <div class="col-xs-4 col-sm-2 col-md-2 col-sm-offset-3 col-md-offset-3">
+                            <select class="form-control sem-body" name="sem">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4 col-sm-2 col-md-2">
+                            <select class="form-control branch-body" name="branch">
+                                <option>IT</option>
+                                <option>CSE</option>
+                                <option>ECE</option>
+                                <option>MECH</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4 col-sm-2 col-md-2">
+                            <select class="form-control sect-body" name="sect">
+                                <option>A</option>
+                                <option>B</option>
+                                <option>COMB</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bottom_clear">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <span class="glyphicon glyphicon-arrow-down header_element"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="well well-sm">
+                    <div class="row info2_header text-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <p class="header_element" style="color:#000000;">
+                                <span class="glyphicon glyphicon-chevron-left head"></span>
+                                ROLE
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row info2_header text-center">
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-sm-offset-4 col-md-offset-4">
+                            <p class="header_element">START</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-2 col-md-2">
+                            <p class="header_element">END</p>
+                        </div>
+                    </div>
+                    <div class="row info2_body text-center">
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-sm-offset-4 col-md-offset-4">
+                            <input type="text" class="form-control" placeholder="1"  name="start_roll" required>
+                        </div>
+                        <div class="col-xs-6 col-sm-2 col-md-2">
+                            <input type="text" class="form-control" placeholder="100" name="end_roll" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bottom_clear">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <span class="glyphicon glyphicon-arrow-down header_element"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center bottom_clear">
+                            <span class="glyphicon glyphicon-time header_element" style="color:#000000;"></span>
+                        </div>
+                    </div>
+                    <div class="row info3_body text-center">
+                        <div class="col-xs-6 col-sm-2 col-sm-2 col-sm-offset-4 col-md-offset-4">
+                            <span class="header_element">CURR. PERIOD</span>
+                        </div>
+                        <div class="col-xs-6 col-sm-2 col-sm-2">
+                            <select class="form-control" name="period">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" value="submit" class="btn btn-success" disabled="disabled"><b>CREATE SHEET</b></button>
+            </div>
+        </div>
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.2.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/student_submit.js')}}"></script>
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/student_submit.css')}}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+    <form action = "{{url_for('sheet_ajax.add_client_sheet_ajax')}}" method = "POST">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <p class="header_element">ROLE NUMBER</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-sm-offset-3 col-md-offset-3">
+                <select class="form-control minw hund" name="hund">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+            </div>
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <select class="form-control minw ten" name="ten">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+            </div>
+            <div class="col-xs-4 col-sm-2 col-md-2">
+                <select class="form-control minw zero" name="zero">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-xs-offset-4 col-sm-offset-5 col-md-offset-5">
+                <h3 class="updated_number well well-sm"><b>0</b></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-xs-offset-4 col-sm-offset-5 col-md-offset-5">
+                <div class="text-center">
+                    <input type="submit" value="SUBMIT" class="btn-sm btn-success">
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</body>
+</html>
