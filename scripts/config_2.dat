@@ -1,5 +1,5 @@
 
-LogLevel warn
+LogLevel info
 
 <IfModule log_config_module>
     #

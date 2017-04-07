@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.2.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/student_submit_response.css')}}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center bottom_clear">
+                <p style="font-size:5em;"><span class="{{data['icon']}}"></span></p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <span class="message">{{data['message']}}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

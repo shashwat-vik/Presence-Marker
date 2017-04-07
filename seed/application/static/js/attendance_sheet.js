@@ -14,7 +14,23 @@ $(document).ready(function(e) {
             set_fire = setInterval(atomic_step_poll,1000*4);
         }
         $(this).find(".glyphicon-play").toggleClass("glyphicon-stop");
+        $(this).find(".glyphicon-play").parent().toggleClass("btn-danger");
     })
+});
+
+$(document).on('click', '#checkAll', function (e) {
+    if(!$(this).attr('disabled')) {
+        x = $('.child_panels').find('.atomic_checkbox')
+        var start_roll = x[0].id*1
+        var end_roll = x[x.length-1].id*1
+        for(var i=start_roll; i <= end_roll; ++i) {
+            elem = $(".child_panels #"+String(i)+".atomic_checkbox")
+            if (!elem.is(':checked')) {
+                elem.parent().find('.atomic_number').click();
+            }
+        }
+    }
+    $(this).attr('disabled', 'disabled');
 });
 
 $(document).on('click', '.header_panel .clickable', function (e) {

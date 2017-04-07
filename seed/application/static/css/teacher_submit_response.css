@@ -1,0 +1,15 @@
+{
+    border: 1px solid red !important;
+}
+body {
+    padding: 40px 0;
+}
+
+.bottom_clear {
+  padding-bottom: 0.5em;
+}
+
+.message {
+    font-size: 2.2em;
+    font-weight: bold;
+}

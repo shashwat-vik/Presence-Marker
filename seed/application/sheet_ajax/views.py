@@ -1,9 +1,7 @@
-from flask import Blueprint, request, redirect, url_for
-from scripts.dhcp_list import DHCP
+from flask import Blueprint, request, redirect, url_for, render_template, send_from_directory
 
+from scripts.dhcp_list import DHCP
 from scripts.create_csv import attendance_csv
-from scripts.create_csv import ip_role_csv
-from scripts.create_csv import dhcp_tp_link_csv
 
 import queue, json, os
 
@@ -35,42 +33,69 @@ def add_client_sheet_ajax():
     #print (request.__dict__)
     #print(ip)
     role = 100*int(request.form['hund']) + 10*int(request.form['ten']) + int(request.form['zero'])
-    if role != 0 and ip not in client_ips.queue:
-        client_ips.put(ip)
-        client_data.put((ip, role))
+    if role == 0:
+        data = {
+        'icon': 'glyphicon glyphicon-exclamation-sign',
+        'message': 'CANNOT SUBMIT ZERO'
+        }
+        return render_template("student_submit_response.html", data=data)
+    if ip not in client_ips.queue:
+        #client_ips.put(ip)
+        client_data.put((role, ip))
         sheet_queue.put(role)
+        data = {
+        'icon': 'glyphicon glyphicon-thumbs-up',
+        'message': 'SUBMITTED'
+        }
+        return render_template("student_submit_response.html", data=data)
         #print (list(client_data.queue))
         #DHCP()
-    return redirect(url_for("basic_blue.student_submit"))
+    else:
+        data = {
+        'icon': 'glyphicon glyphicon-remove-sign',
+        'message': 'SUBMISSION LOCKED'
+        }
+        return render_template("student_submit_response.html", data=data)
 
 @sheet_ajax_blueprint.route("/{0}/submitted_attendance".format(base_url), methods=['POST'])
 def submitted_attendance():
     global client_data
+
+    ##########################################
     sem = request.form['hid_sem']
     branch = request.form['hid_branch']
     sect = request.form['hid_sect']
-    period = request.form['hid_per']
+    period = int(request.form['hid_per'])
+    periods_count = int(request.form['periods_count'])
     start_roll = int(request.form['hid_start_roll'])
     end_roll = int(request.form['hid_end_roll'])
     var_id = request.form.getlist("var_id[]")
+    ##########################################
 
     root = os.getcwd().replace("\\","/")
     root = root.split('/Apache24/bin')[0]
     csv_path = root + '/tmp'
-    session_name = "/{0}_{1}_{2}_{3}".format(sem, branch, sect, period)
+    session_name = "{0}_{1}_{2}_{3}.csv".format(sem, branch, sect, period)
 
+    ##########################################
     present_rolls = set()
     for i in var_id:
         present_rolls.add(int(i[2:]))
-    filename = csv_path + "/{0}_{1}_{2}_{3}.csv".format(sem, branch, sect, period)
-    attendance_csv(filename, sem, branch, sect, period, start_roll, end_roll, present_rolls)
+    role_ip_dict = dict(client_data.queue)
 
-    client_data_sorted_list = sorted(list(client_data.queue), key=lambda x:x[1])
-    ip_role_csv(csv_path + '/ip_role.csv', client_data_sorted_list)
+    filename = csv_path + '/' + session_name
+    attendance_csv(filename, sem, branch, sect, period, periods_count, start_roll, end_roll, present_rolls, role_ip_dict)
+    ##########################################
 
-    ip_mac = DHCP()
-    dhcp_tp_link_csv(csv_path + '/dhcp_csv_tp_link.csv', client_data_sorted_list, ip_mac)
-    return "<h1>AWESOME !</h1>"
+    while not client_data.empty():
+        client_data.get()
+    return render_template("teacher_submit_response.html", filename=session_name, filepath=csv_path)
+
+@sheet_ajax_blueprint.route("/{0}/download".format(base_url), methods=['POST'])
+def csv_download():
+    filepath = request.form['filepath']
+    filename = request.form['filename']
+    return send_from_directory(directory=filepath, filename=filename, as_attachment=True)
 
 @sheet_ajax_blueprint.route("/{0}/display".format(base_url))
 def display_sheet_ajax():

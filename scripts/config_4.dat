@@ -3,7 +3,7 @@ LoadFile "{0}/Python35-32/python-3.5.2/python35.dll"
 LoadModule wsgi_module "{0}/Python35-32/python-3.5.2/lib/site-packages/mod_wsgi/server/mod_wsgi.cp35-win32.pyd"
 WSGIPythonHome "{0}/Python35-32/python-3.5.2"
 
-<Directory {0}/seed>
+<Directory "{0}/seed">
     Require all granted
 </Directory>
-WSGIScriptAlias / {0}/seed/test.wsgi
+WSGIScriptAlias / "{0}/seed/test.wsgi"

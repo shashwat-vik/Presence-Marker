@@ -2,7 +2,9 @@ import sys, os, logging
 
 # Expand Python classes path
 # Default will point in Apache24/bin
-import_path = os.path.abspath("F:/X/seed/application")
+root = os.getcwd().replace("\\","/")
+root = root.split('/Apache24/bin')[0]
+import_path = os.path.abspath("{0}/seed/application".format(root))
 if import_path not in sys.path:
     sys.path.insert(0, import_path)
 
