@@ -1,6 +1,5 @@
 from flask import Blueprint, request, redirect, url_for, render_template, send_from_directory
 
-from scripts.dhcp_list import DHCP
 from scripts.create_csv import attendance_csv
 
 import queue, json, os
