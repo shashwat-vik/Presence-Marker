@@ -7,14 +7,18 @@ def get_ip_address():
     return s.getsockname()[0]
 
 def attendance_csv(filename, sem, branch, sect, period, periods_count, start_roll, end_roll, present_rolls, role_ip_dict):
-    ip_mac_dict = DHCP()
+    ip_mac_dict = dict()
+    try:
+        ip_mac_dict = DHCP()
+    except:
+        pass
 
     f = open(filename, 'w', newline='')
     csvwriter = csv.writer(f)
 
     fields = ['SEMESTER', 'BRANCH', 'SECTION']
     csvwriter.writerow(fields)
-    
+
     args = [[sem, ''], [branch, ''], [sect, '']]
     rows = zip(args[0], args[1], args[2])
     for row in rows:

@@ -6,7 +6,7 @@ def task(i):
         #print (i)
         i += 1
 
-for i in range(9, 50):
+for i in range(5, 12):
     start = i*10+1
     t = threading.Thread(target=task,args=(start,))
     t.start()
